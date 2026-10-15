@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#B3162F">
+<title>Lenia · Schluck & Ruhe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#B3162F;--onbg:#FFF4F5;--soft:#FFD6DB;--card:#FFF4F5;--ink:#4A1019;--mute:#8A4452;--water:#EE5C75;--deep:#8E1228;--peach:#FFD3C9;--line:#EBB8BF;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--onbg);font:400 17px/1.5 Nunito,system-ui,sans-serif;min-height:100vh}
+main{max-width:30rem;margin:0 auto;padding:1.25rem 1.1rem 5.5rem}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.15;margin:0}
+h1{font-size:1.9rem}
+h2{font-size:1.4rem}
+p{margin:.4rem 0}
+.mute{color:var(--soft)}
+.item .mute{color:var(--mute)}
+h1::after{content:" ♥";font-size:.55em;color:var(--peach);vertical-align:.2em}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-size:140px 140px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23fff' fill-opacity='.14'%3E%3Cpath transform='translate(14 16) scale(.9)' d='M12 21s-7-4.5-9.5-9C.8 8.5 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.2 4.5 4.5 8-2.5 4.5-9.5 9-9.5 9z'/%3E%3Cpath transform='translate(88 64) scale(1.2)' d='M12 21s-7-4.5-9.5-9C.8 8.5 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.2 4.5 4.5 8-2.5 4.5-9.5 9-9.5 9z'/%3E%3Cpath transform='translate(30 96) scale(.55)' d='M12 21s-7-4.5-9.5-9C.8 8.5 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.2 4.5 4.5 8-2.5 4.5-9.5 9-9.5 9z'/%3E%3Cpath transform='translate(104 14) scale(.6)' d='M12 21s-7-4.5-9.5-9C.8 8.5 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.2 4.5 4.5 8-2.5 4.5-9.5 9-9.5 9z'/%3E%3C/g%3E%3C/svg%3E")}
+main{position:relative;z-index:1}
+.fh{position:fixed;pointer-events:none;z-index:9;color:var(--peach);animation:fh 1.5s ease-out forwards}
+@keyframes fh{from{opacity:1}to{opacity:0;transform:translateY(-110px)}}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible{outline:3px solid var(--onbg);outline-offset:3px}
+nav{z-index:5;position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:.5rem;padding:.6rem .8rem calc(.6rem + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+nav button{flex:1;max-width:14rem;padding:.7rem;border-radius:999px;font-weight:700;color:var(--soft)}
+nav button[aria-selected=true]{background:var(--card);color:var(--deep)}
+.view[hidden]{display:none}
+/* Glas */
+.glasswrap{display:flex;flex-direction:column;align-items:center;margin:1.4rem 0 1rem}
+.glass{position:relative;width:11rem;height:14rem;border:4px solid var(--onbg);border-top-width:3px;border-radius:.6rem .6rem 2.8rem 2.8rem;overflow:hidden;background:var(--card);cursor:pointer}
+.fill{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(var(--water),var(--deep));transition:height .8s cubic-bezier(.3,.8,.3,1)}
+.fill::before{content:"";position:absolute;left:-10%;right:-10%;top:-.55rem;height:1.1rem;background:var(--water);border-radius:50%}
+.pct{position:absolute;inset:0;display:grid;place-items:center;font:700 1.7rem Fraunces,Georgia,serif;color:var(--ink);mix-blend-mode:normal;text-shadow:0 0 8px var(--card),0 0 2px var(--card)}
+.amount{font:700 1.5rem Fraunces,Georgia,serif;margin-top:1rem}
+.btn{display:block;width:100%;padding:1rem;border-radius:1rem;background:var(--card);color:var(--deep);font-weight:700;font-size:1.1rem;box-shadow:0 3px 0 rgba(74,16,25,.35)}
+.btn.soft{background:transparent;color:var(--onbg);border:1.5px solid var(--onbg);font-weight:600;box-shadow:none}
+.row{display:flex;gap:.6rem;margin-top:.7rem}
+.row .btn{padding:.75rem;font-size:1rem}
+.goal{color:var(--ink);display:flex;align-items:center;justify-content:space-between;margin-top:1.4rem;padding:.8rem 1rem;border-radius:1rem;background:var(--card);border:1px solid var(--line)}
+.goal button{width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--line);font-size:1.3rem;font-weight:700}
+.note{min-height:1.6rem;text-align:center;font-weight:600;color:var(--onbg)}
+/* Ruhe */
+.sos{margin:1.2rem 0 .8rem;padding:1.3rem 1.2rem;border-radius:1.4rem;background:var(--peach);color:#3A1C10;text-align:left;width:100%}
+.sos b{display:block;font:700 1.35rem Fraunces,Georgia,serif}
+.list{display:grid;gap:.7rem;margin-top:1rem}
+.item{color:var(--ink);display:block;width:100%;text-align:left;padding:1rem 1.1rem;border-radius:1rem;background:var(--card);border:1px solid var(--line)}
+.item b{display:block;font-size:1.1rem}
+.back{margin:0 0 1rem;padding:.4rem 0;font-weight:700;color:var(--soft)}
+.stage{display:grid;place-items:center;height:16rem;margin:1rem 0}
+.orb{width:9rem;height:9rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#FFB3BF);transform:scale(.55);display:grid;place-items:center;color:var(--deep);font-weight:700;transition:transform 4s ease-in-out}
+.stepcard{color:var(--ink);padding:1.6rem 1.3rem;border-radius:1.2rem;background:var(--card);border:1px solid var(--line);min-height:9rem;font-size:1.2rem;display:flex;align-items:center}
+.dots{display:flex;gap:.4rem;justify-content:center;margin:1rem 0}
+.dots i{width:.55rem;height:.55rem;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--onbg)}
+.daily{margin:0 0 1.3rem;padding:1.1rem 1.2rem;border-radius:1.2rem;background:var(--peach);color:#3A1C10}
+.daily small{display:block;font-weight:700;margin-bottom:.3rem}
+.daily p{margin:0;font:500 1.2rem/1.35 Fraunces,Georgia,serif}
+.us{margin:0 0 1.3rem;padding:1rem 1.2rem;border-radius:1.2rem;background:var(--card);color:var(--ink);text-align:center}
+.us b{display:block;margin:.15rem 0;font:700 1.7rem/1.2 Fraunces,Georgia,serif;color:var(--deep)}
+.us small{display:block;color:var(--mute)}
+.greet{margin:0 0 .9rem;font:500 1.15rem Fraunces,Georgia,serif;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.fill,.orb{transition:none!important}.fh{display:none}}
+.gform{display:grid;gap:.6rem;margin:1rem 0}
+.gform input{width:100%;padding:.9rem 1rem;border-radius:1rem;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.gform input::placeholder{color:var(--mute);opacity:.8}
+.gform input:focus-visible{outline:3px solid var(--onbg);outline-offset:2px}
+#ghead{margin-top:1.8rem}
+.gday{padding:.9rem 1.1rem;border-radius:1rem;background:var(--card);color:var(--ink)}
+.gday small{display:block;font-weight:700;color:var(--mute);margin-bottom:.2rem}
+.gday ul{margin:0;padding-left:1.1rem}
+</style>
+</head>
+<body>
+<main>
+<section id="wasser" class="view">
+  <p class="greet" id="greet"></p>
+  <div class="daily"><small>Von mir für dich, heute</small><p id="daily"></p></div>
+  <div class="us"><small>Wir sind zusammen seit dem 2. Mai 2025</small><b id="usd"></b><small id="usa"></small><small id="usn"></small></div>
+  <h1>Trink einen Schluck.</h1>
+  <p class="mute">Ein Glas ist 250 ml. Tippe aufs Glas oder auf den Button.</p>
+  <div class="glasswrap">
+    <div class="glass" id="glass" role="img" aria-label="Füllstand"><div class="fill" id="fill"></div><div class="pct" id="pct">0 %</div></div>
+    <div class="amount" id="amount"></div>
+    <div class="mute" id="last"></div>
+  </div>
+  <div class="note" id="note" aria-live="polite"></div>
+  <button class="btn" id="add">Glas getrunken (+250 ml)</button>
+  <div class="row"><button class="btn soft" id="half">Kleiner Schluck (+100 ml)</button><button class="btn soft" id="undo">Rückgängig</button></div>
+  <div class="goal"><span>Tagesziel: <b id="goaltxt"></b></span><span><button id="gm" aria-label="Ziel senken">−</button> <button id="gp" aria-label="Ziel erhöhen">+</button></span></div>
+</section>
+
+<section id="ruhe" class="view" hidden>
+  <div id="ruhehome">
+    <h1>Atme durch.</h1>
+    <p class="mute">Such dir aus, was gerade passt. Du musst nichts richtig machen.</p>
+    <button class="sos" data-ex="atmen"><b>Mir ist gerade alles zu viel</b>Starte die Atemübung. Sie dauert etwa 90 Sekunden.</button>
+    <div class="list">
+      <button class="item" data-ex="atmen"><b>Atmen 4-7-8</b><span class="mute">Lang ausatmen beruhigt den Körper.</span></button>
+      <button class="item" data-ex="ground"><b>5-4-3-2-1</b><span class="mute">Hol dich mit allen Sinnen ins Hier und Jetzt.</span></button>
+      <button class="item" data-ex="body"><b>Körper lockern</b><span class="mute">Schultern, Hände und Kiefer entspannen.</span></button>
+    </div>
+  </div>
+  <div id="exercise" hidden>
+    <button class="back" id="back">‹ Zurück</button>
+    <h2 id="extitle"></h2>
+    <div id="exbody"></div>
+  </div>
+</section>
+<section id="gut" class="view" hidden>
+  <h1>Was war heute schön?</h1>
+  <p class="mute">Schreib drei Dinge auf, auch ganz kleine. Sie zählen alle.</p>
+  <div class="gform">
+    <input id="g0" maxlength="140" placeholder="Zum Beispiel: der erste Kaffee heute" aria-label="Erstes gutes Ding">
+    <input id="g1" maxlength="140" placeholder="Zum Beispiel: ein Lächeln von jemandem" aria-label="Zweites gutes Ding">
+    <input id="g2" maxlength="140" placeholder="Zum Beispiel: etwas, das ich geschafft habe" aria-label="Drittes gutes Ding">
+  </div>
+  <button class="btn" id="gsave">Speichern</button>
+  <div class="note" id="gnote" aria-live="polite"></div>
+  <h2 id="ghead" hidden>Deine schönen Momente</h2>
+  <div class="list" id="glist"></div>
+</section>
+</main>
+<nav role="tablist">
+  <button role="tab" id="t1" aria-selected="true" data-v="wasser">Wasser</button>
+  <button role="tab" id="t2" aria-selected="false" data-v="ruhe">Ruhe</button>
+  <button role="tab" id="t3" aria-selected="false" data-v="gut">Gutes</button>
+</nav>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+/* ---------- Speicher ---------- */
+var KEY='schluck-ruhe-v1';
+function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+var S={date:today(),goal:2000,log:[]};
+try{var r=localStorage.getItem(KEY);if(r){var p=JSON.parse(r);if(p&&typeof p==='object'){S.goal=p.goal||2000;if(p.date===S.date)S.log=p.log||[]}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function total(){return S.log.reduce(function(a,b){return a+b.ml},0)}
+function fmt(ml){return (ml/1000).toLocaleString('de-DE',{maximumFractionDigits:2})+' l'}
+/* ---------- Wasser ---------- */
+function render(){
+  if(S.date!==today()){S.date=today();S.log=[];save()}
+  var t=total(),pc=Math.min(100,Math.round(t/S.goal*100));
+  $('fill').style.height=pc+'%';
+  $('pct').textContent=pc+' %';
+  $('amount').textContent=fmt(t)+' von '+fmt(S.goal);
+  $('goaltxt').textContent=fmt(S.goal);
+  $('glass').setAttribute('aria-label',pc+' Prozent des Tagesziels');
+  $('note').textContent=t>=S.goal?'Tagesziel geschafft. Gut gemacht!':'';
+  var l=S.log[S.log.length-1];
+  if(l){var m=Math.max(0,Math.round((Date.now()-l.t)/60000));$('last').textContent='Zuletzt getrunken: '+(m<1?'gerade eben':m<60?'vor '+m+' Min.':'vor '+Math.floor(m/60)+' Std.')}
+  else $('last').textContent='Heute noch nichts getrunken.';
+}
+function burst(){var r=$('glass').getBoundingClientRect();for(var i=0;i<5;i++){var h=document.createElement('span');h.className='fh';h.textContent='♥';h.style.left=(r.left+Math.random()*r.width)+'px';h.style.top=(r.top+r.height*.3)+'px';h.style.fontSize=(12+Math.random()*14)+'px';h.style.animationDelay=(i*.08)+'s';document.body.appendChild(h);(function(x){setTimeout(function(){x.remove()},1800)})(h)}}
+function add(ml){S.log.push({ml:ml,t:Date.now()});save();render();burst()}
+$('add').onclick=$('glass').onclick=function(){add(250)};
+$('half').onclick=function(){add(100)};
+$('undo').onclick=function(){S.log.pop();save();render()};
+$('gm').onclick=function(){S.goal=Math.max(500,S.goal-250);save();render()};
+$('gp').onclick=function(){S.goal=Math.min(5000,S.goal+250);save();render()};
+setInterval(function(){render();us()},30000);
+render();
+/* ---------- Nachricht des Tages ---------- */
+var MSG=[
+'Du machst das gut, auch wenn der Tag sich gerade anders anfühlt.',
+'Ich bin stolz auf dich. Heute ganz besonders.',
+'Du musst heute nicht alles schaffen. Ein Schritt nach dem anderen reicht.',
+'Denk dran: ein Glas Wasser, ein tiefer Atemzug, und weiter geht es.',
+'Ich glaube an dich, egal was heute ansteht.',
+'Du bist mir wichtig. Das wollte ich dir heute einfach sagen.',
+'Wenn es stressig wird: Pause machen ist erlaubt.',
+'Ich freue mich darauf, dich bald zu sehen.',
+'Du hast schon so viel geschafft. Das darfst du ruhig sehen.',
+'Sei heute nett zu dir, so wie du es zu anderen bist.',
+'Ich denke an dich. Schick mir gern ein Foto von deinem Tag.',
+'Du bist stärker, als du dich manchmal fühlst.',
+'Heute ist ein guter Tag für etwas, das dir Freude macht.',
+'Danke, dass es dich gibt.'
+];
+var now=new Date();
+var dn=Math.floor(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())/86400000);
+$('daily').textContent=MSG[dn%MSG.length];
+var hr=new Date().getHours();
+$('greet').textContent=(hr<11?'Guten Morgen':hr<18?'Hallo':'Guten Abend')+', Lenia ♥';
+/* ---------- Zusammen seit ---------- */
+function pl(n,a,b){return n+' '+(n===1?a:b)}
+function us(){
+  var n=new Date(),t=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+  var mo=(t.getFullYear()-2025)*12+(t.getMonth()-4);if(t.getDate()<2)mo--;
+  var d=Math.round((t-new Date(2025,4+mo,2))/864e5);
+  var next=new Date(2025,4+mo+1,2),left=Math.round((next-t)/864e5);
+  var all=Math.round((t-new Date(2025,4,2))/864e5);
+  $('usd').textContent=pl(mo,'Monat','Monate')+(d?', '+pl(d,'Tag','Tage'):'');
+  $('usa').textContent='Das sind '+all.toLocaleString('de-DE')+' Tage.';
+  $('usn').textContent=d===0?'Heute ist unser Monatstag ♥':'Nächster Monatstag am '+next.toLocaleDateString('de-DE',{day:'numeric',month:'long'})+': noch '+pl(left,'Tag','Tage');
+}
+us();
+/* ---------- Drei gute Dinge ---------- */
+var GK='gute-dinge-v1',G={};
+try{var gr=localStorage.getItem(GK);if(gr){var gp=JSON.parse(gr);if(gp&&typeof gp==='object')G=gp}}catch(e){}
+function gstore(){try{localStorage.setItem(GK,JSON.stringify(G))}catch(e){}}
+function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function pd(k){var p=k.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function gstreak(){var d=new Date(),n=0;if(!G[dkey(d)])d.setDate(d.getDate()-1);while(G[dkey(d)]){n++;d.setDate(d.getDate()-1)}return n}
+function grender(){
+  var k=dkey(new Date()),t=G[k]||[];
+  for(var i=0;i<3;i++)$('g'+i).value=t[i]||'';
+  var keys=Object.keys(G).filter(function(x){return x!==k}).sort(function(a,b){return pd(b)-pd(a)}).slice(0,30);
+  var box=$('glist');box.innerHTML='';$('ghead').hidden=!keys.length;
+  keys.forEach(function(x){
+    var c=document.createElement('div');c.className='gday';
+    var s=document.createElement('small');s.textContent=pd(x).toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'});
+    var u=document.createElement('ul');
+    (G[x]||[]).forEach(function(v){var li=document.createElement('li');li.textContent=v;u.appendChild(li)});
+    c.appendChild(s);c.appendChild(u);box.appendChild(c);
+  });
+}
+$('gsave').onclick=function(){
+  var v=[0,1,2].map(function(i){return $('g'+i).value.trim()}).filter(Boolean);
+  if(!v.length){$('gnote').textContent='Schreib mindestens eine Sache auf.';return}
+  G[dkey(new Date())]=v;gstore();grender();
+  var n=gstreak();
+  $('gnote').textContent=(v.length===3?'Gespeichert. Drei gute Dinge, das war ein schöner Tag ♥':'Gespeichert. Wenn dir noch etwas einfällt, ergänze es einfach.')+(n>1?' '+n+' Tage in Folge.':'');
+};
+grender();
+/* ---------- Tabs ---------- */
+function tab(v){
+  ['wasser','ruhe','gut'].forEach(function(x){$(x).hidden=x!==v});
+  $('t1').setAttribute('aria-selected',v==='wasser');
+  $('t2').setAttribute('aria-selected',v==='ruhe');
+  $('t3').setAttribute('aria-selected',v==='gut');
+  stopBreath();window.scrollTo(0,0);
+}
+$('t1').onclick=function(){tab('wasser')};
+$('t2').onclick=function(){tab('ruhe')};
+$('t3').onclick=function(){tab('gut')};
+/* ---------- Übungen ---------- */
+var run=0;
+function stopBreath(){run++}
+function showEx(show){$('ruhehome').hidden=show;$('exercise').hidden=!show;if(!show)stopBreath();window.scrollTo(0,0)}
+$('back').onclick=function(){showEx(false)};
+document.querySelectorAll('[data-ex]').forEach(function(b){b.onclick=function(){start(b.getAttribute('data-ex'))}});
+function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function start(k){
+  showEx(true);var body=$('exbody');
+  if(k==='atmen'){
+    $('extitle').textContent='Atmen 4-7-8';
+    body.innerHTML='<p class="mute">Setz dich bequem hin. 4 Runden: einatmen, halten, lang ausatmen.</p><div class="stage"><div class="orb" id="orb"></div></div><button class="btn" id="go">Start</button>';
+    $('go').onclick=function(){breathe()};
+  }else{
+    var d=k==='ground'?{t:'5-4-3-2-1',s:['Nenne 5 Dinge, die du sehen kannst. Schau dich langsam um.','Nenne 4 Dinge, die du gerade fühlen kannst: Stoff, Boden, Temperatur.','Nenne 3 Geräusche, die du hörst. Auch leise zählen.','Nenne 2 Dinge, die du riechen kannst.','Nenne 1 Sache, die du schmecken kannst. Atme einmal tief durch.']}
+    :{t:'Körper lockern',s:['Setz dich bequem hin, die Füße fest auf dem Boden.','Zieh die Schultern hoch zu den Ohren und halte 5 Sekunden.','Lass die Schultern fallen und atme dabei aus.','Balle beide Fäuste, zähle bis 5, öffne sie dann langsam.','Lass den Kiefer los: Zähne auseinander, Zunge locker.','Atme einmal tief ein und aus. Spür, wie schwer die Arme werden.']};
+    $('extitle').textContent=d.t;steps(d.s);
+  }
+}
+function steps(arr){
+  var i=0,body=$('exbody');
+  function draw(){
+    var dots=arr.map(function(_,n){return '<i class="'+(n<=i?'on':'')+'"></i>'}).join('');
+    var last=i===arr.length-1;
+    body.innerHTML='<div class="stepcard" style="margin-top:1rem">'+arr[i]+'</div><div class="dots">'+dots+'</div><button class="btn" id="nx">'+(last?'Fertig':'Weiter')+'</button>';
+    $('nx').onclick=function(){if(last){showEx(false)}else{i++;draw()}};
+  }
+  draw();
+}
+async function breathe(){
+  var me=++run,orb=$('orb'),go=$('go');
+  if(!orb)return;go.textContent='Stopp';go.onclick=function(){stopBreath();start('atmen')};
+  var ph=[['Einatmen',4,1],['Halten',7,1],['Ausatmen',8,.55]];
+  for(var n=1;n<=4;n++){
+    for(var j=0;j<3;j++){
+      if(me!==run)return;
+      var p=ph[j];
+      orb.style.transitionDuration=(j===1?0:p[1])+'s';
+      orb.style.transform='scale('+p[2]+')';
+      orb.textContent=p[0];
+      await wait(p[1]*1000);
+    }
+  }
+  if(me!==run)return;
+  orb.style.transitionDuration='1s';orb.style.transform='scale(.55)';orb.textContent='Geschafft';
+  go.textContent='Nochmal';go.onclick=function(){start('atmen')};
+}
+})();
+</script>
+</body>
+</html>
